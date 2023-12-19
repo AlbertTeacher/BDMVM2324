@@ -1,0 +1,8 @@
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD=startrek
+ENV MYSQL_DATABASE=StarWars
+
+COPY starWars.sql /docker-entrypoint-initdb.d/starWars.sql
+
+CMD ["mysqld"]
