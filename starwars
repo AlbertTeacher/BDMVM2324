@@ -1,9 +1,10 @@
 #!/bin/sh
 
-DOCKERFILE="DockerfileStarWars "
-IMAGE="starwars"
-CONTAINER="starwarsdb "
-PROGRAM="starwars.sh"
+TITLE="StarWars"
+DOCKERFILE="Dockerfile${TITLE}"
+IMAGE=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]')
+CONTAINER="${IMAGE}db "
+PROGRAM="${IMAGE}.sh"
 
 BLUE="\e[34m"
 BOLDUNDERLINEBLUE="\e[1;4;34m"
