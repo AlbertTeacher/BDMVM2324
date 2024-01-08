@@ -1,0 +1,6 @@
+FROM mysql:latest
+
+ENV MYSQL_DATABASE=xarxa_social
+ENV MYSQL_ROOT_PASSWORD=suspens
+
+CMD ["mysqld"]

@@ -4,12 +4,14 @@ DOCKERFILE="Dockerfile${TITLE}"
 IMAGE=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]')
 CONTAINER="${IMAGE}db"
 PROGRAM="${IMAGE}.sh"
+PASSWORD=$(grep "MYSQL_ROOT_PASSWORD" $DOCKERFILE | cut -d'=' -f2)
 
 BLUE="\e[34m"
 BOLDUNDERLINEBLUE="\e[1;4;34m"
 BOLDWHITE="\e[1;97m"
 RED="\e[31m"
 GREEN="\e[32m"
+HIGHLIGHT="\e[3;30;103m"
 ENDCOLOR="\e[0m"
 
 upServer() {
@@ -21,7 +23,8 @@ upServer() {
 	docker run --name ${CONTAINER} -d ${IMAGE} > /dev/null 
 	echo "\b\b\b100%${ENDCOLOR}"
 	sleep 1
-	docker exec -it ${CONTAINER} bash
+	echo "${HIGHLIGHT}Password: ${PASSWORD}${ENDCOLOR}"
+	docker exec -it ${CONTAINER} mysql -p
 }
 
 downServer() {
