@@ -1,5 +1,6 @@
 #!/bin/sh
 
+CURRENT_PWD=$PWD
 TITLE="BotigaOnline"
 
-. ./manageServer.sh
+. ./common/manageServer.sh

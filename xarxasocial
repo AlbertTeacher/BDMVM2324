@@ -1,5 +1,6 @@
 #!/bin/sh
 
+CURRENT_PWD=$PWD
 TITLE="XarxaSocial"
 
-. ./manageServer.sh
+. ./common/manageServer.sh

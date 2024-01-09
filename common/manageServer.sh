@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DOCKERFILE="Dockerfile${TITLE}"
+DOCKERFILE="${CURRENT_PWD}/dockerfiles/Dockerfile${TITLE}"
 IMAGE=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]')
 CONTAINER="${IMAGE}db"
 PROGRAM="${IMAGE}.sh"
@@ -24,7 +24,7 @@ upServer() {
 	echo "\b\b\b100%${ENDCOLOR}"
 	sleep 1
 	echo "${HIGHLIGHT}Password: ${PASSWORD}${ENDCOLOR}"
-	docker exec -it ${CONTAINER} mysql -p
+	docker exec -it ${CONTAINER} bash -c "while ! mysqladmin ping --silent; do sleep 0.25; done; mysql -p"
 }
 
 downServer() {

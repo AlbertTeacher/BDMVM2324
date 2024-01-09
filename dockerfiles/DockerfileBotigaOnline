@@ -3,6 +3,6 @@ FROM mysql:latest
 ENV MYSQL_ROOT_PASSWORD=suspenso
 ENV MYSQL_DATABASE=botigaOnline
 
-COPY botigaOnline.sql /docker-entrypoint-initdb.d/botigaOnline.sql
+COPY ../sqlfiles/botigaOnline.sql /docker-entrypoint-initdb.d/botigaOnline.sql
 
 CMD ["mysqld"]
