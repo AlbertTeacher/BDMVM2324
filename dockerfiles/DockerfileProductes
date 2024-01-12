@@ -1,0 +1,8 @@
+FROM mysql:latest
+
+ENV MYSQL_DATABASE=Productes
+ENV MYSQL_ROOT_PASSWORD=1234
+
+COPY ../sqlfiles/productes.sql /docker-entrypoint-initdb.d/productes.sql
+
+CMD ["mysqld"]
