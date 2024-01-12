@@ -40,7 +40,13 @@ downServer() {
 	echo "\b\b\b100%${ENDCOLOR}"
 }
 
-while getopts :udrh flag
+enterServer() {
+	echo -n "${BLUE}Enter MySQL server..."
+	echo "${HIGHLIGHT}Password: ${PASSWORD}${ENDCOLOR}"
+	docker exec -it ${CONTAINER} mysql -p
+}
+
+while getopts :udreh flag
 do
 	case "${flag}" in
 		u) 
@@ -57,6 +63,10 @@ do
 			upServer
 			exit 0
 			;;
+		e)
+			enterServer
+			exit 0
+			;;
 	esac
 done
 
@@ -64,4 +74,5 @@ shift $((OPTIND-1))
 
 echo "\n${BLUE}Use ${BOLDWHITE}${PROGRAM} -u${ENDCOLOR}${BLUE} to ${BOLDUNDERLINEBLUE}Start${ENDCOLOR}${BLUE} MySQL server with ${CONTAINER}"
 echo "Use ${BOLDWHITE}${PROGRAM} -d${ENDCOLOR}${BLUE} to ${BOLDUNDERLINEBLUE}Stop${ENDCOLOR}${BLUE} and delete MySQL server with ${CONTAINER}"
-echo "Use ${BOLDWHITE}${PROGRAM} -r${ENDCOLOR}${BLUE} to ${BOLDUNDERLINEBLUE}Restart${ENDCOLOR}${BLUE} MySQL server with ${CONTAINER}${ENDCOLOR}\n"
+echo "Use ${BOLDWHITE}${PROGRAM} -r${ENDCOLOR}${BLUE} to ${BOLDUNDERLINEBLUE}Restart${ENDCOLOR}${BLUE} MySQL server with ${CONTAINER}"
+echo "Use ${BOLDWHITE}${PROGRAM} -e${ENDCOLOR}${BLUE} to ${BOLDUNDERLINEBLUE}Enter${ENDCOLOR}${BLUE} MySQL server with ${CONTAINER}${ENDCOLOR}\n"
