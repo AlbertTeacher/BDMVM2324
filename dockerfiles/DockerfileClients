@@ -1,0 +1,8 @@
+FROM mysql:latest
+
+ENV MYSQL_DATABASE=Clients
+ENV MYSQL_ROOT_PASSWORD=1234
+
+COPY ../sqlfiles/clients.sql /docker-entrypoint-initdb.d/clients.sql
+
+CMD ["mysqld"]
