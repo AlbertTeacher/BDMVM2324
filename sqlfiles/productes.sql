@@ -1,9 +1,9 @@
 -- Crear la base de dades
-CREATE TABLE IF NOT EXISTS Productes;
+CREATE DATABASE IF NOT EXISTS Productes;
 USE Productes;
 
 -- Crear la taula Productes
-CREATE TABLE Productes (
+CREATE TABLE IF NOT EXISTS Productes (
     ProducteID INT,
     Categoria VARCHAR(50),
     Preu DECIMAL(10, 2),
