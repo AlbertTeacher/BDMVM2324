@@ -1,0 +1,7 @@
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD=estudiar
+
+COPY ../sqlfiles/teoria.sql /docker-entrypoint-initdb.d/teoria.sql
+
+CMD [ "mysqld" ]
