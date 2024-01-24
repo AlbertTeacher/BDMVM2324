@@ -1,5 +1,6 @@
 -- Crear les bases de dades
 CREATE DATABASE IF NOT EXISTS InternalComposition;
+CREATE DATABASE IF NOT EXISTS Cursos;
 
 -- Crear les taules
 CREATE TABLE InternalComposition.Clients (
@@ -29,6 +30,25 @@ CREATE TABLE InternalComposition.Cursos (
     FOREIGN KEY (EstudianteID) REFERENCES InternalComposition.Estudiantes(EstudianteID)
 );
 
+CREATE TABLE Cursos.Estudiantes (
+    EstudianteID INT PRIMARY KEY,
+    Nombre VARCHAR(50)
+);
+
+CREATE TABLE Cursos.Cursos (
+    CursoID INT PRIMARY KEY,
+    Nombre VARCHAR(50)
+);
+
+CREATE TABLE Cursos.Inscripciones (
+    InscripcionID INT PRIMARY KEY,
+    EstudianteID INT,
+    CursoID INT,
+    FOREIGN KEY (EstudianteID) REFERENCES Estudiantes(EstudianteID),
+    FOREIGN KEY (CursoID) REFERENCES Cursos(CursoID)
+);
+
+
 -- Inserir dades
 INSERT INTO InternalComposition.Clients VALUES
 (1, 'Maria', 'Gomez'),
@@ -50,3 +70,27 @@ INSERT INTO InternalComposition.Cursos VALUES
 (102, 'Diseño Gráfico', 2),
 (103, 'Inglés', 3),
 (104, 'Matemáticas', 1);
+
+INSERT INTO Cursos.Estudiantes (EstudianteID, Nombre) VALUES
+(1, 'Juan Pérez'),
+(2, 'Ana Gómez'),
+(3, 'Carlos Rodríguez'),
+(4, 'María López'),
+(5, 'David Martínez');
+
+INSERT INTO Cursos.Cursos (CursoID, Nombre) VALUES
+(101, 'Matemáticas'),
+(102, 'Historia'),
+(103, 'Ciencias'),
+(104, 'Inglés'),
+(105, 'Arte');
+
+INSERT INTO Cursos.Inscripciones (InscripcionID, EstudianteID, CursoID) VALUES
+(1, 1, 101),
+(2, 1, 103),
+(3, 2, 102),
+(4, 3, 104),
+(5, 4, 101),
+(6, 4, 105),
+(7, 5, 103),
+(8, 5, 104);
