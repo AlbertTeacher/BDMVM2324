@@ -1,6 +1,7 @@
 -- Crear les bases de dades
 CREATE DATABASE IF NOT EXISTS InternalComposition;
 CREATE DATABASE IF NOT EXISTS Cursos;
+CREATE DATABASE IF NOT EXISTS Llibreries;
 
 -- Crear les taules
 CREATE TABLE InternalComposition.Clients (
@@ -48,6 +49,19 @@ CREATE TABLE Cursos.Inscripciones (
     FOREIGN KEY (CursoID) REFERENCES Cursos(CursoID)
 );
 
+CREATE TABLE llibres_llibreria1 (
+    id_llibre INT PRIMARY KEY,
+    titol VARCHAR(100),
+    autor VARCHAR(100),
+    preu DECIMAL(10, 2)
+);
+
+CREATE TABLE llibres_llibreria2 (
+    id_llibre INT PRIMARY KEY,
+    titol VARCHAR(100),
+    autor VARCHAR(100),
+    preu DECIMAL(10, 2)
+);
 
 -- Inserir dades
 INSERT INTO InternalComposition.Clients VALUES
@@ -94,3 +108,19 @@ INSERT INTO Cursos.Inscripciones (InscripcionID, EstudianteID, CursoID) VALUES
 (6, 4, 105),
 (7, 5, 103),
 (8, 5, 104);
+
+INSERT INTO llibres_llibreria1 (id_llibre, titol, autor, preu)
+VALUES
+    (1, 'El Senyor dels Anells', 'J.R.R. Tolkien', 25.99),
+    (2, 'Harry Potter i la Pedra Filosofal', 'J.K. Rowling', 19.99),
+    (3, 'Cien anys de soledad', 'Gabriel Garcia Marquez', 22.50),
+    (4, '1984', 'George Orwell', 18.75),
+    (5, 'Orgull i prejudici', 'Jane Austen', 15.00);
+
+INSERT INTO llibres_llibreria2 (id_llibre, titol, autor, preu)
+VALUES
+    (2, 'Harry Potter i la Pedra Filosofal', 'J.K. Rowling', 22.99),
+    (3, 'Cien anys de soledad', 'Gabriel Garcia Marquez', 24.50),
+    (4, '1984', 'George Orwell', 19.99),
+    (5, 'Orgull i prejudici', 'Jane Austen', 14.50),
+    (6, 'Crònica de una mort anunciada', 'Gabriel Garcia Marquez', 20.25);
