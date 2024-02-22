@@ -2,6 +2,7 @@
 CREATE DATABASE IF NOT EXISTS InternalComposition;
 CREATE DATABASE IF NOT EXISTS Cursos;
 CREATE DATABASE IF NOT EXISTS Llibreries;
+CREATE DATABASE IF NOT EXISTS Escola;
 
 -- Crear les taules
 CREATE TABLE InternalComposition.Clients (
@@ -61,6 +62,22 @@ CREATE TABLE Llibreries.llibres_llibreria2 (
     titol VARCHAR(100),
     autor VARCHAR(100),
     preu DECIMAL(10, 2)
+);
+
+CREATE TABLE Escola.cursos (
+    id_curs INT PRIMARY KEY,
+    nom_curs VARCHAR(50),
+    professor VARCHAR(50),
+    hores_setmanals INT
+);
+
+CREATE TABLE Escola.estudiants (
+    id_estudiant INT PRIMARY KEY,
+    nom VARCHAR(50),
+    cognom VARCHAR(50),
+    edat INT,
+    id_curs INT,
+    FOREIGN KEY (id_curs) REFERENCES cursos(id_curs)
 );
 
 -- Inserir dades
@@ -124,3 +141,16 @@ VALUES
     (4, '1984', 'George Orwell', 19.99),
     (5, 'Orgull i prejudici', 'Jane Austen', 14.50),
     (6, 'Crònica de una mort anunciada', 'Gabriel Garcia Marquez', 20.25);
+
+INSERT INTO Escola.cursos (id_curs, nom_curs, professor, hores_setmanals)
+VALUES
+    (1, 'Matemàtiques', 'Dr. Smith', 4),
+    (2, 'Història', 'Prof. Johnson', 3),
+    (3, 'Informàtica', 'Dr. Brown', 5);
+
+INSERT INTO Escola.estudiants (id_estudiant, nom, cognom, edat, id_curs)
+VALUES
+    (1, 'Anna', 'Gómez', 20, 1),
+    (2, 'Marc', 'Martínez', 22, 2),
+    (3, 'Laura', 'López', 21, 1),
+    (4, 'Eric', 'Espasa', 23, 3);
