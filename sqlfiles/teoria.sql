@@ -4,6 +4,7 @@ CREATE DATABASE IF NOT EXISTS Cursos;
 CREATE DATABASE IF NOT EXISTS Llibreries;
 CREATE DATABASE IF NOT EXISTS Escola;
 CREATE DATABASE IF NOT EXISTS Empleats;
+CREATE DATABASE IF NOT EXISTS Empleats;
 
 -- Crear les taules
 CREATE TABLE InternalComposition.Clients (
@@ -81,19 +82,19 @@ CREATE TABLE Escola.estudiants (
     FOREIGN KEY (id_curs) REFERENCES cursos(id_curs)
 );
 
-CREATE TABLE employees (
+CREATE TABLE Empleats.employees (
     emp_id INT PRIMARY KEY,
     emp_name VARCHAR(255),
     dept_id INT,
     project_id INT
 );
 
-CREATE TABLE departments (
+CREATE TABLE Empleats.departments (
     dept_id INT PRIMARY KEY,
     dept_name VARCHAR(255)
 );
 
-CREATE TABLE projects (
+CREATE TABLE Empleats.projects (
     project_id INT PRIMARY KEY,
     project_name VARCHAR(255)
 );
@@ -173,7 +174,7 @@ VALUES
     (3, 'Laura', 'López', 21, 1),
     (4, 'Eric', 'Espasa', 23, 3);
 
-INSERT INTO employees (emp_id, emp_name, dept_id, project_id)
+INSERT INTO Empleats.employees (emp_id, emp_name, dept_id, project_id)
 VALUES
     (1, 'Alice', 1, 101),
     (2, 'Bob', 2, 102),
@@ -181,13 +182,13 @@ VALUES
     (4, 'David', 3, 101),
     (5, 'Eva', 2, NULL);
 
-INSERT INTO departments (dept_id, dept_name)
+INSERT INTO Empleats.departments (dept_id, dept_name)
 VALUES
     (1, 'HR'),
     (2, 'IT'),
     (3, 'Finance');
 
-INSERT INTO projects (project_id, project_name)
+INSERT INTO Empleats.projects (project_id, project_name)
 VALUES
     (101, 'HR System'),
     (102, 'Website Redesign'),
