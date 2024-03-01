@@ -1,0 +1,7 @@
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD=qwerty
+
+COPY ../sqlfiles/customers.sql /docker-entrypoint-initdb.d/customers.sql
+
+CMD [ "mysqld" ]
