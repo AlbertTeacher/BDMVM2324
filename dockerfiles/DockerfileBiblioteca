@@ -1,0 +1,6 @@
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD=entrenador
+ENV MYSQL_DATABASE=biblioteca
+
+COPY ../sqlfiles/biblioteca.sql /docker-entrypoint-initdb.d/biblioteca.sql

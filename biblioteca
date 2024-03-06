@@ -1,0 +1,6 @@
+#!/bin/sh
+
+CURRENT_PWD=$PWD
+TITLE="Biblioteca"
+
+. ./common/manageServer.sh
