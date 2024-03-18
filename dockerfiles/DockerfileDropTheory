@@ -1,0 +1,6 @@
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD=todoalrojo
+ENV MYSQL_DATABASE=DropTheory
+
+COPY ../sqlfiles/droptable.sql /docker-entrypoint-initdb.d/droptable.sql
