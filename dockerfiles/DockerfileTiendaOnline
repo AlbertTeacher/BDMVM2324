@@ -1,0 +1,8 @@
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD=loscascosenclase
+ENV MYSQL_DATABASE=tiendaOnline
+
+COPY ../sqlfiles/tiendaOnline.sql /docker-entrypoint-initdb.d/tiendaOnline.sql
+
+CMD ["mysqld"]
