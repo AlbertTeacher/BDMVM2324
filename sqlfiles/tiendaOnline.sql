@@ -1,8 +1,8 @@
 -- Creación de la base de datos
-CREATE DATABASE IF NOT EXISTS tienda_online;
+CREATE DATABASE IF NOT EXISTS tiendaOnline;
 
 -- Selección de la base de datos
-USE tienda_online;
+USE tiendaOnline;
 
 -- Creación de la tabla productos
 CREATE TABLE IF NOT EXISTS productos (
