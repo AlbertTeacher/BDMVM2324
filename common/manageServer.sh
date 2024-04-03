@@ -14,19 +14,6 @@ GREEN="\e[32m"
 HIGHLIGHT="\e[3;30;103m"
 ENDCOLOR="\e[0m"
 
-upServer() {
-	echo -n "${GREEN}Starting MySQL server..."
-	echo -n "0%"
-	docker build -t ${IMAGE} -f ${DOCKERFILE} . 2> /dev/null
-	echo -n "\b\b50%"
-	sleep 0.25
-	docker run --name ${CONTAINER} -d ${IMAGE} > /dev/null 
-	echo "\b\b\b100%${ENDCOLOR}"
-	sleep 1
-	echo "${HIGHLIGHT}Password: ${PASSWORD}${ENDCOLOR}"
-	docker exec -it ${CONTAINER} bash -c "while ! mysqladmin ping --silent; do sleep 0.25; done; mysql -p"
-}
-
 downServer() {
 	echo -n "${RED}Down MySQL server..."
 	echo -n "0%"
@@ -40,17 +27,29 @@ downServer() {
 	echo "\b\b\b100%${ENDCOLOR}"
 }
 
+startServer() {
+	echo -n "${GREEN}Starting MySQL server..."
+	echo -n "0%"
+	docker build -t ${IMAGE} -f ${DOCKERFILE} . 2> /dev/null
+	echo -n "\b\b50%"
+	sleep 0.25
+	docker run --name ${CONTAINER} -d ${IMAGE} -p 3306:3306 > /dev/null 
+	echo "\b\b\b100%${ENDCOLOR}"
+	sleep 1
+}
+
 enterServer() {
 	echo -n "${BLUE}Enter MySQL server..."
 	echo "${HIGHLIGHT}Password: ${PASSWORD}${ENDCOLOR}"
 	docker exec -it ${CONTAINER} mysql -p
 }
 
-while getopts :udreh flag
+while getopts :udresh flag
 do
 	case "${flag}" in
 		u) 
-			upServer
+			startServer
+			enterServer
 			exit 0
 			;;
 		d)
@@ -60,11 +59,16 @@ do
 		r)
 			echo "Restarting Server...."
 			downServer
-			upServer
+			startServer
+			enterServer
 			exit 0
 			;;
 		e)
 			enterServer
+			exit 0
+			;;
+		s)
+			startServer
 			exit 0
 			;;
 	esac
@@ -72,7 +76,8 @@ done
 
 shift $((OPTIND-1))
 
-echo "\n${BLUE}Use ${BOLDWHITE}${PROGRAM} -u${ENDCOLOR}${BLUE} to ${BOLDUNDERLINEBLUE}Start${ENDCOLOR}${BLUE} MySQL server with ${CONTAINER}"
+echo "\n${BLUE}Use ${BOLDWHITE}${PROGRAM} -u${ENDCOLOR}${BLUE} to ${BOLDUNDERLINEBLUE}Up${ENDCOLOR}${BLUE} MySQL server with ${CONTAINER}"
 echo "Use ${BOLDWHITE}${PROGRAM} -d${ENDCOLOR}${BLUE} to ${BOLDUNDERLINEBLUE}Stop${ENDCOLOR}${BLUE} and delete MySQL server with ${CONTAINER}"
 echo "Use ${BOLDWHITE}${PROGRAM} -r${ENDCOLOR}${BLUE} to ${BOLDUNDERLINEBLUE}Restart${ENDCOLOR}${BLUE} MySQL server with ${CONTAINER}"
 echo "Use ${BOLDWHITE}${PROGRAM} -e${ENDCOLOR}${BLUE} to ${BOLDUNDERLINEBLUE}Enter${ENDCOLOR}${BLUE} MySQL server with ${CONTAINER}${ENDCOLOR}\n"
+echo "Use ${BOLDWHITE}${PROGRAM} -s${ENDCOLOR}${BLUE} to ${BOLDUNDERLINEBLUE}Start${ENDCOLOR}${BLUE} MySQL server with ${CONTAINER}${ENDCOLOR}\n"
