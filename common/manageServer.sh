@@ -33,7 +33,7 @@ startServer() {
 	docker build -t ${IMAGE} -f ${DOCKERFILE} . 2> /dev/null
 	echo -n "\b\b50%"
 	sleep 0.25
-	docker run --name ${CONTAINER} -d ${IMAGE} -p 3306:3306 > /dev/null 
+	docker run --name ${CONTAINER} -d ${IMAGE} > /dev/null 
 	echo "\b\b\b100%${ENDCOLOR}"
 	sleep 1
 }
