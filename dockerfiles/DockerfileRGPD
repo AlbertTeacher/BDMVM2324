@@ -1,0 +1,7 @@
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD=1234
+
+COPY ../sqlfiles/rgpd.sql /docker-entrypoint-initdb.d/rgpd.sql
+
+CMD [ "mysqld" ]
